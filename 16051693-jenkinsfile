@@ -9,7 +9,7 @@ pipeline{
 			parallel{
 				stage('Stage2-16051693'){
 					steps{
-						sh docker run -d -it --name=stage2-16051693-container apache2-16051693-image
+						sh docker run -d --name=stage2-16051693-container apache2-16051693-image
 						echo 'Stage 2 Completed-16051693'
 					}
 				}
@@ -35,4 +35,6 @@ pipeline{
 			}
 		}
 	}
+}
+
 }
