@@ -1,23 +1,22 @@
 pipeline{
-	agent any
 	stages{
 		stage('Stage1-16051693'){
-			echo 'Stage 1 Completed-16051693'
+			steps{
+				echo 'Stage 1 Completed-16051693'
+			}
 		}
-		parallel{
-			stage('Stage2-16051693'){
-				agents{
-					docker{
-						image 'Apache2-16051693'
+		stage('Creating Container'){
+			parallel{
+				stage('Stage2-16051693')
+					steps{
+						sh docker run -d -name=stage2-16051693 -container apache2-16051693
+						echo 'Stage 2 Completed-16051693'
 					}
 				}
-				steps{
-					echo 'Stage 2 Completed-16051693'
-				}
-			}
-			stage('Stage3-16051693'){
-				steps{
-					echo 'Stage 3 Completed-16051693'
+				stage('Stage3-16051693'){
+					steps{
+						echo 'Stage 3 Completed-16051693'
+					}
 				}
 			}
 		}
@@ -27,8 +26,9 @@ pipeline{
 		stage('Stage5-16051693'){
 			when{
 				not{
-					Abort
+					branch "master executes"
 				}
+
 			}
 			steps{
 				echo 'Work Released-16051693'
