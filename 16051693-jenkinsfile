@@ -1,4 +1,5 @@
 pipeline{
+	agent any
 	stages{
 		stage('Stage1-16051693'){
 			steps{
@@ -9,7 +10,7 @@ pipeline{
 			parallel{
 				stage('Stage2-16051693'){
 					steps{
-						sh 'docker run -d --name=stage2-16051693-container apache2-16051693-image'
+						sh docker run -d --name=stage2-16051693-container apache2-16051693-image
 						echo 'Stage 2 Completed-16051693'
 					}
 				}
@@ -21,7 +22,9 @@ pipeline{
 			}
 		}
 		stage('Stage4-16051693'){
-			input('Proceed to release the work?')
+			steps{
+				input('Proceed to release the work?')
+			}
 		}
 		stage('Stage5-16051693'){
 			when{
