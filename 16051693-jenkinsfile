@@ -1,2 +1,38 @@
-This Repo is for Jenkins Pipeline
-
+pipeline{
+	agent any
+	stages{
+		stage('Stage1-16051693'){
+			echo 'Stage 1 Completed-16051693'
+		}
+		parallel{
+			stage('Stage2-16051693'){
+				agents{
+					docker{
+						image 'Apache2-16051693'
+					}
+				}
+				steps{
+					echo 'Stage 2 Completed-16051693'
+				}
+			}
+			stage('Stage3-16051693'){
+				steps{
+					echo 'Stage 3 Completed-16051693'
+				}
+			}
+		}
+		stage('Stage4-16051693'){
+			input('Proceed to release the work?')
+		}
+		stage('Stage5-16051693'){
+			when{
+				not{
+					Abort
+				}
+			}
+			steps{
+				echo 'Work Released-16051693'
+			}
+		}
+	}
+}
